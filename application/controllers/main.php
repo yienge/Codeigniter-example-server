@@ -38,7 +38,7 @@ class Main extends CI_Controller {
     {
         if ( isset($_POST['addr'])) {
             // get the geo of the addr
-            $addr_base_url  = 'http://maps.googleapis.com/maps/api/geocode/json?sensor = true&address = ';
+            $addr_base_url  = 'http://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=';
             $addr_query_url = $addr_base_url.$_POST['addr'];
             $addr_json      = $this->curl->simple_get($addr_query_url);
             $addr_array     = json_decode($addr_json,true);
