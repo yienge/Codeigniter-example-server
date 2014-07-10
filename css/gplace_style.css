@@ -1,0 +1,5 @@
+        html { height: 100% }
+        body { height: 70%; margin: 0px; padding: 10px 10px 10px 10px }
+        #map_canvas { height: 100%; margin:10px 10px 10px 10px}
+        #result {padding:10px 10px 10px 10px; margin: 10px 10px 10px 10px}
+        tr.even {background: grey;}

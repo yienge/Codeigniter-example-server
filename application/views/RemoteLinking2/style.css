@@ -1,0 +1,27 @@
+/*
+	 CSS-Tricks Example
+	 by Chris Coyier
+	 http://css-tricks.com
+*/
+
+*					{ margin: 0; padding: 0; }
+body				{ font: 12px Helvetica, Sans-Serif; }
+
+
+#page-wrap			{ width: 600px; margin: 50px auto; }
+
+h1					{ font-size: 30px; letter-spacing: -1px; margin: 0 0 20px 0; } 
+
+.people				{ position: relative; } 
+a					{ text-decoration: none; color: #222; display: block;
+	 				  margin: 0 0 0 270px; outline: none; padding: 5px; }
+a img				{ border: 1px solid #ccc; }
+a:hover				{ background: #ffefcd; }
+a .name				{ font: 18px Georgia, Serif; }
+a:hover .name		{ color: #900; font-weight: bold; } 
+a:hover img			{ border: 5px solid #222; margin: -4px; }
+a .photo			{ display: block; position: absolute; width: 125px; height: 125px; }
+#toby .photo		{ top: 0; left: 0; }
+#tom .photo		    { top: 0; left: 134px; }
+#gail .photo		{ top: 134px; left: 0; }
+#padma .photo		{ top: 134px; left: 134px; }
