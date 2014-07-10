@@ -11,11 +11,12 @@ class Main extends CI_Controller {
     // ------------------------------------------------- Test index page
     public function index() {
         $data = array(
-            'title' => 'MyTitle',
+            'title'   => 'MyTitle',
             'heading' => 'TestHeading',
             'message' => 'wow, this is a good play.',
-            'list' => array('shopping', 'sleeping'),
+            'list'    => array('shopping', 'sleeping'),
         );
+
         $data['query'] = $this->db->query('select * from article order by date desc limit 3');
         //echo '<html>';
         //$this->load->view('general/top_view');
@@ -37,27 +38,28 @@ class Main extends CI_Controller {
     {
         if ( isset($_POST['addr'])) {
             // get the geo of the addr
-            $addr_base_url = 'http://maps.googleapis.com/maps/api/geocode/json?sensor=true&address=';
+            $addr_base_url  = 'http://maps.googleapis.com/maps/api/geocode/json?sensor = true&address = ';
             $addr_query_url = $addr_base_url.$_POST['addr'];
-            $addr_json = $this->curl->simple_get($addr_query_url);
-            $addr_array = json_decode($addr_json,true);
+            $addr_json      = $this->curl->simple_get($addr_query_url);
+            $addr_array     = json_decode($addr_json,true);
             $location_array = $addr_array['results'][0]['geometry']['location'];
-            $location = $location_array['lat'].','.$location_array['lng'];
+            $location       = $location_array['lat'].','.$location_array['lng'];
             //$location = '25.0494359,121.6159658';
 
             $base_url_search = 'https://maps.googleapis.com/maps/api/place/search/';
-            $radius = $_POST['radius'];
-            $types = $_POST['types'];
-            $name = $_POST['name'];
-            $output = 'json';
-            $sensor = 'false';
-            $key = 'AIzaSyDAMwyb1V3jXI1H-0gNzNl6xzVlLmTRq_o';
+            $radius          = $_POST['radius'];
+            $types           = $_POST['types'];
+            $name            = $_POST['name'];
+            $output          = 'json';
+            $sensor          = 'false';
+            $key             = 'AIzaSyDAMwyb1V3jXI1H-0gNzNl6xzVlLmTRq_o';
 
             $search_url = $base_url_search.$output.'?location='.$location.'&radius='.$radius.'&types='.$types.'&name='.$name.'&sensor='.$sensor.'&key='.$key;
             $search_json = $this->curl->simple_get($search_url);
             $data['search_array'] = json_decode($search_json,true);
-        } else
+        } else {
             $data = '';
+        }
         $this->load->view('general/googleplace_view', $data);
 
         // Simple call to CI URI
@@ -72,10 +74,10 @@ class Main extends CI_Controller {
     public function gplace_details($third)
     {
         $base_url_details = 'https://maps.googleapis.com/maps/api/place/details/';
-        $output = 'json';
-        $reference = $third;
-        $sensor = 'false';
-        $key = 'AIzaSyDAMwyb1V3jXI1H-0gNzNl6xzVlLmTRq_o';
+        $output           = 'json';
+        $reference        = $third;
+        $sensor           = 'false';
+        $key              = 'AIzaSyDAMwyb1V3jXI1H-0gNzNl6xzVlLmTRq_o';
 
         $details_url = $base_url_details.$output.'?reference='.$reference.'&sensor='.$sensor.'&key='.$key;
         $details_json = $this->curl->simple_get($details_url);
@@ -86,12 +88,16 @@ class Main extends CI_Controller {
     public function twitter()
     {
         // this example is not workable now since twitter api need OAuth now.
-        $this->load->library('rest', array('server'    => 'http://api.twitter.com/',
-            'http_user' => 'yienge@gmail.com',
-            'http_pass' => '20010214h',
-            'http_auth' => 'basic',
-        )
-    );
+        $this->load->library(
+            'rest',
+            array(
+                'server'    => 'http://api.twitter.com/',
+                'http_user' => 'yienge@gmail.com',
+                'http_pass' => '20010214h',
+                'http_auth' => 'basic',
+            )
+        );
+
         $user = $this->rest->post('statuses/update.json', array('status' => 'Twitter API test codeigniter rest client test'));
         echo 'hihi so sad the twitter need OAuth now. but at leat the rest can work?';
     }
@@ -247,14 +253,14 @@ EOT;
         //$image_path1 = './images/5077374515_5db523fd93_o.jpg';
         $image = imagecreatefromjpeg($image_path1);
 
-            for($i = 2; $i <= 10; $i++) {
-                $quality = $i * 10;
-                $target_path = sprintf('/tmp/test3_%s.jpg', $quality);
-                imagejpeg($image, $target_path, $quality);
-                $image_size = filesize($target_path);
-                echo $target_path . ' : ' . round(($image_size / (1024))) . "KB \n";;
-            }
-            imagedestroy($image);
+        for($i = 2; $i <= 10; $i++) {
+            $quality = $i * 10;
+            $target_path = sprintf('/tmp/test3_%s.jpg', $quality);
+            imagejpeg($image, $target_path, $quality);
+            $image_size = filesize($target_path);
+            echo $target_path . ' : ' . round(($image_size / (1024))) . "KB \n";;
+        }
+        imagedestroy($image);
     }
 
     public function test_scan_dir(){
@@ -281,7 +287,7 @@ EOT;
 
         foreach($size_quality_mapping as $size => $quality) {
             if ($image_size <= $size) {
-               return $quality;
+                return $quality;
             }
         }
         return 50;
@@ -370,8 +376,8 @@ EOT;
         // kill all symbols that chinese user may use
         var_dump(json_encode('§ ♫  ♪ ㊣ ❤ ♡ '));
         $keyword = preg_replace('/[\x{2000}-\x{3040}]/u' ,
-                                '',
-                                '《》＜＞ ○ ※ ◎ § ● ← ； 「 ＆ ＃ ＄ ％ ＠ █ ▼ ▲ △ ☆ ★ ㊣ ■ □ ♂ ♀ ※ 【上衣】');
+            '',
+            '《》＜＞ ○ ※ ◎ § ● ← ； 「 ＆ ＃ ＄ ％ ＠ █ ▼ ▲ △ ☆ ★ ㊣ ■ □ ♂ ♀ ※ 【上衣】');
         var_dump($keyword);
 
         $a = array('AM00213243243' => '300x200');
