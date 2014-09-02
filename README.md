@@ -1,7 +1,7 @@
 Codeigniter-example-server
 ==========================
 
-A simple codeigniter implement for experiments.
+A simple codeigniter website implementation.
 
 ## book store
 
@@ -9,6 +9,6 @@ A simple codeigniter implement for experiments.
 * example book store controller : application/controllers/book.php
 * example book store model      : application/models/book_model.php
 
-## php testing
+## php API testing code
 
-* php testing controllers : application/controllers/main.php
+* php API testing controllers : application/controllers/main.php
